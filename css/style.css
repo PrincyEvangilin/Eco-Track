@@ -285,17 +285,20 @@ label:has(input:checked) {
 }
 @media(max-width:768px){
 
-    .navbar{
-        flex-direction:row;
-        justify-content:space-between;
-        align-items:center;
-    }
+   .navbar{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+}
 
-    .nav-links{
-        flex-direction:row;
-        gap:10px;
-        flex-wrap:wrap;
-    }
+.nav-links{
+    display:flex;
+    flex-direction:row;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
 
     .hero{
         flex-direction:column;
