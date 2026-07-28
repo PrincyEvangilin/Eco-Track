@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,16 @@
 
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+
 <header>
     <nav class="navbar">
+
         <h2 class="logo">🌿 Eco Track</h2>
 
-<button id="themeBtn">🌙</button>
+        <button id="themeBtn">🌙</button>
+
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#water">Water</a></li>
@@ -20,11 +25,16 @@
             <li><a href="#carbon">Carbon</a></li>
             <li><a href="#waste">Waste</a></li>
         </ul>
+
     </nav>
 </header>
+
+
+
 <section class="hero" id="home">
 
     <div class="hero-text">
+
         <h1>Build a Greener Tomorrow 🌍</h1>
 
         <p>
@@ -34,139 +44,244 @@
         </p>
 
         <button id="startBtn">Get Started</button>
+
     </div>
+
 
     <div class="hero-image">
         🌿
     </div>
 
 </section>
+
+
+
+
 <section class="score">
 
     <h2>🌱 Eco Score</h2>
 
     <h1 id="score">0</h1>
 
-    <p>Become an Eco Hero by completing eco-friendly activities!</p>
-<h3 id="badge"></h3>
+    <p>
+        Become an Eco Hero by completing eco-friendly activities!
+    </p>
+
+    <h3 id="badge"></h3>
+
 </section>
+
+
+
+
 
 <section class="features">
 
-   <div class="card" id="water">
 
-    <h2>💧 Water Tracker</h2>
+<div class="card" id="water">
 
-    <input type="number" id="waterInput" placeholder="Enter litres used">
+<h2>💧 Water Tracker</h2>
 
-    <button id="waterBtn">Check</button>
+<input type="number" id="waterInput" placeholder="Enter litres used">
 
-    <h3 id="waterResult"></h3>
+<button id="waterBtn">Check</button>
 
-</div>
-    <div class="card" id="electricity">
-
-    <h2>⚡ Electricity Tracker</h2>
-
-    <input type="number" id="electricityInput" placeholder="Enter units used">
-
-    <button id="electricityBtn">Check</button>
-
-    <h3 id="electricityResult"></h3>
+<h3 id="waterResult"></h3>
 
 </div>
 
-    <div class="card" id="carbon">
 
-    <h2>🌍 Carbon Footprint</h2>
 
-    <input type="number" id="carbonInput" placeholder="Travel distance (km)">
 
-    <button id="carbonBtn">Check</button>
 
-    <h3 id="carbonResult"></h3>
+<div class="card" id="electricity">
+
+<h2>⚡ Electricity Tracker</h2>
+
+<input type="number" id="electricityInput" placeholder="Enter units used">
+
+<button id="electricityBtn">Check</button>
+
+<h3 id="electricityResult"></h3>
 
 </div>
 
-   <div class="card" id="waste">
 
-    <h2>♻ Waste Tracker</h2>
 
-    <select id="wasteType">
-        <option value="">Select Waste</option>
-        <option value="plastic">Plastic</option>
-        <option value="paper">Paper</option>
-        <option value="glass">Glass</option>
-        <option value="organic">Organic</option>
-    </select>
 
-    <button id="wasteBtn">Check</button>
 
-    <h3 id="wasteResult"></h3>
-    
-    
+<div class="card" id="carbon">
+
+<h2>🌍 Carbon Footprint</h2>
+
+<input type="number" id="carbonInput" placeholder="Travel distance (km)">
+
+<button id="carbonBtn">Check</button>
+
+<h3 id="carbonResult"></h3>
+
 </div>
+
+
+
+
+
+<div class="card" id="waste">
+
+<h2>♻ Waste Tracker</h2>
+
+<select id="wasteType">
+
+<option value="">Select Waste</option>
+
+<option value="plastic">Plastic</option>
+
+<option value="paper">Paper</option>
+
+<option value="glass">Glass</option>
+
+<option value="organic">Organic</option>
+
+</select>
+
+
+<button id="wasteBtn">Check</button>
+
+<h3 id="wasteResult"></h3>
+
+</div>
+
+
 </section>
+
+
+
+
+
 <section class="goals">
-    <h2>🌱 Eco Goals</h2>
- 
-    <label>
-    <input type="checkbox" class="goal">
-    <span>Use reusable bottle ♻️</span>
+
+<h2>🌱 Eco Goals</h2>
+
+
+<label>
+
+<input type="checkbox" class="goal">
+
+<span>Use reusable bottle ♻️</span>
+
 </label>
 
-    
-        <label>
-    <input type="checkbox" class="goal">
-    <span>Save electricity 💡</span>
+
+
+<label>
+
+<input type="checkbox" class="goal">
+
+<span>Save electricity 💡</span>
+
 </label>
-    
 
-    
-        <label>
-        <input type="checkbox" class="goal">
-        <span>Avoid plastic bags 🛍️</span>
-        </label>
-    
 
-    
-        <label>
-        <input type="checkbox" class="goal">
-       <span> Plant a tree 🌳</span>
-        </label>
-    
 
-    <section class="dashboard">
+<label>
 
-    <div class="dashboard-card">
-        <h2>🌱 Eco Score</h2>
-        <h1 id="points">0</h1>
-    </div>
+<input type="checkbox" class="goal">
 
-    <div class="dashboard-card">
-        <h2>🏆 Eco Level</h2>
-        <h3 id="level">No Badge Yet 🍃</h3>
-    </div>
+<span>Avoid plastic bags 🛍️</span>
 
-    <div class="dashboard-card">
-        <h2>📊 Eco Progress</h2>
-<div class="progress-bar">
-    <div id="progress"></div>
+</label>
+
+
+
+<label>
+
+<input type="checkbox" class="goal">
+
+<span>Plant a tree 🌳</span>
+
+</label>
+
+
+</section>
+
+
+
+
+
+
+<section class="dashboard">
+
+
+<div class="dashboard-card">
+
+<h2>🌱 Eco Score</h2>
+
+<h1 id="points">0</h1>
+
 </div>
-        </div>
 
-        <p>
-            <span id="completed">0</span>/4 Goals Completed
-        </p>
 
-    </div>
+
+
+
+<div class="dashboard-card">
+
+<h2>🏆 Eco Level</h2>
+
+<h3 id="level">
+No Badge Yet 🍃
+</h3>
+
+</div>
+
+
+
+
+
+<div class="dashboard-card">
+
+<h2>📊 Eco Progress</h2>
+
+
+<div class="progress-bar">
+
+<div id="progress"></div>
+
+</div>
+
+
+<p>
+
+<span id="completed">0</span>/4 Goals Completed
+
+</p>
+
+
+</div>
+
 
 </section>
-</section>
+
+
+
+
+
 <footer>
-    <h3>🌱 EcoTrack</h3>
-    <p>Small actions create a greener future 🌍</p>
-    <p>© 2026 EcoTrack. All rights reserved.</p>
+
+<h3>🌱 EcoTrack</h3>
+
+<p>Small actions create a greener future 🌍</p>
+
+<p>© 2026 EcoTrack. All rights reserved.</p>
+
 </footer>
-    <script src="js/script.js"></script>
+
+
+
+
+
+<script src="js/script.js"></script>
+
 </body>
+
+</html>

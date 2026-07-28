@@ -1,365 +1,502 @@
-let ecoScore = Number(localStorage.getItem("ecoScore")) || 0;
-document.getElementById("score").textContent = ecoScore;
-if (localStorage.getItem("darkMode") === "true") {
-    document.body.classList.add("dark");
-}
-
-// Prevent duplicate tracker points
-let waterDone = localStorage.getItem("waterDone") === "true";
-let electricityDone = localStorage.getItem("electricityDone") === "true";
-let carbonDone = localStorage.getItem("carbonDone") === "true";
-
 // ---------------- Eco Score ----------------
 
-function updateScore(points) {
+let ecoScore = 0;
+
+let waterDone = false;
+let electricityDone = false;
+let carbonDone = false;
+
+
+function updateScore(points){
+
     ecoScore += points;
 
     document.getElementById("score").textContent = ecoScore;
-    localStorage.setItem("ecoScore", ecoScore);
 
-    if (ecoScore >= 100) {
+
+    if(ecoScore >= 100){
+
         document.getElementById("badge").innerHTML =
-            "🏆 Congratulations! You are an Eco Hero!";
+        "🏆 Congratulations! You are an Eco Hero!";
+
     }
+
 }
+
+
 
 // ---------------- Get Started ----------------
 
-const button = document.getElementById("startBtn");
+document.getElementById("startBtn").addEventListener("click",function(){
 
-button.addEventListener("click", function () {
     document.querySelector(".features").scrollIntoView({
-        behavior: "smooth"
+        behavior:"smooth"
     });
+
 });
+
+
+
 
 // ---------------- Water Tracker ----------------
 
-const waterBtn = document.getElementById("waterBtn");
+document.getElementById("waterBtn").addEventListener("click",function(){
 
-waterBtn.addEventListener("click", function () {
+    let water = Number(document.getElementById("waterInput").value);
 
-    const water = Number(document.getElementById("waterInput").value);
-    const result = document.getElementById("waterResult");
+    let result = document.getElementById("waterResult");
 
-    if (isNaN(water) || water <= 0) {
-        result.innerHTML = "❌ Please enter valid litres.";
-        return;
-    }
 
-    if (water <= 100) {
-        result.innerHTML = "🌿 Excellent! You're saving water.";
+    if(water <= 100){
 
-        if (!waterDone) {
+        result.innerHTML="🌿 Excellent! You're saving water.";
+
+
+        if(!waterDone){
+
             updateScore(25);
             waterDone = true;
-localStorage.setItem("waterDone", "true");
+
         }
 
-    } else if (water <= 200) {
-
-        result.innerHTML = "💧 Good! Try to save a little more.";
-
-        if (!waterDone) {
-            updateScore(15);
-            waterDone = true;
-localStorage.setItem("waterDone", "true");
-        }
-
-    } else {
-
-        result.innerHTML = "⚠️ High water usage. Save more water!";
-
-        if (!waterDone) {
-            updateScore(5);
-            waterDone = true;
-localStorage.setItem("waterDone", "true");
-        }
 
     }
 
+    else if(water <= 200){
+
+
+        result.innerHTML="💧 Good! Try to save a little more.";
+
+
+        if(!waterDone){
+
+            updateScore(15);
+            waterDone = true;
+
+        }
+
+
+    }
+
+    else{
+
+
+        result.innerHTML="⚠️ High water usage. Save more water!";
+
+
+        if(!waterDone){
+
+            updateScore(5);
+            waterDone = true;
+
+        }
+
+
+    }
+
+
 });
+
+
+
+
 
 // ---------------- Electricity Tracker ----------------
 
-const electricityBtn = document.getElementById("electricityBtn");
 
-electricityBtn.addEventListener("click", function () {
+document.getElementById("electricityBtn").addEventListener("click",function(){
 
-    const units = Number(document.getElementById("electricityInput").value);
-    const result = document.getElementById("electricityResult");
 
-    if (isNaN(units) || units <= 0) {
-        result.innerHTML = "❌ Please enter valid units.";
-        return;
-    }
+    let units = Number(document.getElementById("electricityInput").value);
 
-    if (units <= 200) {
+    let result = document.getElementById("electricityResult");
 
-        result.innerHTML = "🌿 Excellent! Eco-friendly usage.";
 
-        if (!electricityDone) {
+
+    if(units <= 200){
+
+
+        result.innerHTML="🌿 Excellent! Eco-friendly usage.";
+
+
+        if(!electricityDone){
+
             updateScore(25);
-            electricityDone = true;
-localStorage.setItem("electricityDone", "true");
+            electricityDone=true;
+
         }
 
-    } else if (units <= 500) {
-
-        result.innerHTML = "⚡ Moderate usage.";
-
-        if (!electricityDone) {
-            updateScore(15);
-            electricityDone = true;
-localStorage.setItem("electricityDone", "true");
-        }
-
-    } else {
-
-        result.innerHTML = "🚨 High electricity usage.";
-
-        if (!electricityDone) {
-            updateScore(5);
-            electricityDone = true;
-localStorage.setItem("electricityDone", "true");
-        }
 
     }
+
+
+    else if(units <= 500){
+
+
+        result.innerHTML="⚡ Moderate usage.";
+
+
+        if(!electricityDone){
+
+            updateScore(15);
+            electricityDone=true;
+
+        }
+
+
+    }
+
+
+    else{
+
+
+        result.innerHTML="🚨 High electricity usage.";
+
+
+        if(!electricityDone){
+
+            updateScore(5);
+            electricityDone=true;
+
+        }
+
+
+    }
+
+
 
 });
+
+
+
+
+
+
 // ---------------- Carbon Tracker ----------------
 
-const carbonBtn = document.getElementById("carbonBtn");
 
-carbonBtn.addEventListener("click", function () {
+document.getElementById("carbonBtn").addEventListener("click",function(){
 
-    const km = Number(document.getElementById("carbonInput").value);
-    const result = document.getElementById("carbonResult");
 
-    if (isNaN(km) || km <= 0) {
-        result.innerHTML = "❌ Please enter a valid distance.";
-        return;
-    }
+    let km = Number(document.getElementById("carbonInput").value);
 
-    if (km <= 10) {
+    let result = document.getElementById("carbonResult");
 
-        result.innerHTML = "🌿 Low carbon footprint.";
 
-        if (!carbonDone) {
+
+    if(km <= 10){
+
+
+        result.innerHTML="🌿 Low carbon footprint.";
+
+
+        if(!carbonDone){
+
             updateScore(25);
-            carbonDone = true;
-localStorage.setItem("carbonDone", "true");
+            carbonDone=true;
+
         }
 
-    } else if (km <= 30) {
-
-        result.innerHTML = "🚶 Moderate carbon footprint.";
-
-        if (!carbonDone) {
-            updateScore(15);
-            carbonDone = true;
-localStorage.setItem("carbonDone", "true");
-        }
-
-    } else {
-
-        result.innerHTML = "🚗 High carbon footprint.";
-
-        if (!carbonDone) {
-            updateScore(5);
-          carbonDone = true;
-localStorage.setItem("carbonDone", "true");
-        }
 
     }
+
+
+    else if(km <= 30){
+
+
+        result.innerHTML="🚶 Moderate carbon footprint.";
+
+
+        if(!carbonDone){
+
+            updateScore(15);
+            carbonDone=true;
+
+        }
+
+
+    }
+
+
+    else{
+
+
+        result.innerHTML="🚗 High carbon footprint.";
+
+
+        if(!carbonDone){
+
+            updateScore(5);
+            carbonDone=true;
+
+        }
+
+
+    }
+
+
 
 });
+
+
+
+
+
 
 // ---------------- Waste Tracker ----------------
 
-const wasteBtn = document.getElementById("wasteBtn");
 
-wasteBtn.addEventListener("click", function () {
+document.getElementById("wasteBtn").addEventListener("click",function(){
 
-    const waste = document.getElementById("wasteType").value;
-    const result = document.getElementById("wasteResult");
 
-    if (waste === "") {
-        result.innerHTML = "❌ Please select a waste type.";
+    let waste=document.getElementById("wasteType").value;
+
+    let result=document.getElementById("wasteResult");
+
+
+
+    if(waste==="plastic"){
+
+        result.innerHTML="♻ Plastic can be recycled.";
+
     }
-    else if (waste === "plastic") {
-        result.innerHTML = "♻ Plastic can be recycled. Use the blue recycling bin.";
+
+    else if(waste==="paper"){
+
+        result.innerHTML="📄 Paper is recyclable.";
+
     }
-    else if (waste === "paper") {
-        result.innerHTML = "📄 Paper is recyclable. Keep it clean and dry.";
+
+    else if(waste==="glass"){
+
+        result.innerHTML="🍾 Glass is recyclable.";
+
     }
-    else if (waste === "glass") {
-        result.innerHTML = "🍾 Glass is recyclable. Handle with care.";
+
+    else if(waste==="organic"){
+
+        result.innerHTML="🌱 Organic waste can be composted.";
+
     }
-    else if (waste === "organic") {
-        result.innerHTML = "🌱 Organic waste can be composted.";
+
+    else{
+
+        result.innerHTML="❌ Please select waste type.";
+
     }
+
 
 });
+
+
+
+
+
 
 // ---------------- Dark Mode ----------------
 
-const themeBtn = document.getElementById("themeBtn");
 
-themeBtn.addEventListener("click", function () {
+let themeBtn=document.getElementById("themeBtn");
+
+
+themeBtn.addEventListener("click",function(){
+
 
     document.body.classList.toggle("dark");
 
-    if (document.body.classList.contains("dark")) {
-        themeBtn.innerHTML = "☀️";
-        localStorage.setItem("darkMode", "true");
-    } 
-    else {
-        themeBtn.innerHTML = "🌙";
-        localStorage.setItem("darkMode", "false");
+
+    if(document.body.classList.contains("dark")){
+
+        themeBtn.innerHTML="☀️";
+
     }
 
+    else{
+
+        themeBtn.innerHTML="🌙";
+
+    }
+
+
 });
+
+
+
+
+
 
 // ---------------- Eco Goals ----------------
 
-let goals = document.querySelectorAll(".goal");
-let points = document.getElementById("points");
-let level = document.getElementById("level");
-let progress = document.getElementById("progress");
-let completed = document.getElementById("completed");
 
-let savedGoals = JSON.parse(localStorage.getItem("savedGoals")) || [];
+let goals=document.querySelectorAll(".goal");
 
-let ecoPoints = savedGoals.length * 10;
+let points=document.getElementById("points");
 
-// Restore checked goals
-goals.forEach(function(goal, index){
+let level=document.getElementById("level");
 
-    if(savedGoals.includes(index)){
-        goal.checked = true;
-    }
+let progress=document.getElementById("progress");
 
-});
+let completed=document.getElementById("completed");
 
-// Goal events
-goals.forEach(function(goal, index){
 
-    goal.addEventListener("change", function(){
+let ecoPoints=0;
 
-        if(goal.checked){
 
-            if(!savedGoals.includes(index)){
-                savedGoals.push(index);
-                ecoPoints += 10;
-            }
 
-        }else{
+goals.forEach(function(goal){
 
-            savedGoals = savedGoals.filter(function(item){
-                return item !== index;
-            });
 
-            ecoPoints -= 10;
+    goal.addEventListener("change",function(){
 
-        }
 
-        points.textContent = ecoPoints;
+        ecoPoints=document.querySelectorAll(".goal:checked").length*10;
+
+
+        points.textContent=ecoPoints;
+
 
         updateProgress();
+
         updateLevel();
 
-        localStorage.setItem("savedGoals", JSON.stringify(savedGoals));
 
     });
 
+
 });
-// ---------------- Progress Bar ----------------
-function updateProgress() {
 
-    let completedGoals = document.querySelectorAll(".goal:checked").length;
 
-    completed.textContent = completedGoals;
 
-    let percentage = (completedGoals / goals.length) * 100;
 
-    progress.style.width = percentage + "%";
 
-}
-document.getElementById("score").textContent = ecoScore;
-if (ecoScore >= 100) {
-    document.getElementById("badge").innerHTML =
-        "🏆 Congratulations! You are an Eco Hero!";
-}
+function updateProgress(){
 
-// ---------------- Eco Level ----------------
 
-function updateLevel() {
+    let completedGoals=document.querySelectorAll(".goal:checked").length;
 
-    if (ecoPoints === 0) {
-        level.textContent = "No Badge Yet 🍃";
-    }
-    else if (ecoPoints <= 10) {
-        level.textContent = "Beginner 🌱";
-    }
-    else if (ecoPoints <= 20) {
-        level.textContent = "Eco Friend 🌿";
-    }
-    else if (ecoPoints <= 40) {
-        level.textContent = "Eco Hero 🌳";
-    }
-    else {
-        level.textContent = "Eco Champion 🏆";
-    }
+
+    completed.textContent=completedGoals;
+
+
+    let percentage=(completedGoals/goals.length)*100;
+
+
+    progress.style.width=percentage+"%";
+
 
 }
 
-// ---------------- Initial Load ----------------
 
-points.textContent = ecoPoints;
-updateLevel();
+
+
+
+function updateLevel(){
+
+
+    if(ecoPoints===0){
+
+        level.textContent="No Badge Yet 🍃";
+
+    }
+
+    else if(ecoPoints<=10){
+
+        level.textContent="Beginner 🌱";
+
+    }
+
+    else if(ecoPoints<=20){
+
+        level.textContent="Eco Friend 🌿";
+
+    }
+
+    else{
+
+        level.textContent="Eco Hero 🌳";
+
+    }
+
+
+}
+
+
 updateProgress();
 
-// ---------------- Active Navbar ----------------
+updateLevel();
 
-const navLinks = document.querySelectorAll(".nav-links a");
+
+
+
+
+
+
+// ---------------- Navbar Active ----------------
+
+
+let navLinks=document.querySelectorAll(".nav-links a");
+
 
 navLinks.forEach(function(link){
 
-    link.addEventListener("click", function(){
+
+    link.addEventListener("click",function(){
+
 
         navLinks.forEach(function(item){
+
             item.classList.remove("active");
+
         });
+
 
         this.classList.add("active");
 
+
     });
+
 
 });
 
+
+
+
+
+
+
 // ---------------- Scroll Animation ----------------
 
-const animatedElements = document.querySelectorAll(
-    ".card, .dashboard-card, .goals, .score"
+
+let animatedElements=document.querySelectorAll(
+".card,.dashboard-card,.goals,.score"
 );
+
+
 
 function showOnScroll(){
 
+
     animatedElements.forEach(function(element){
 
-        let position = element.getBoundingClientRect().top;
-        let screenHeight = window.innerHeight;
 
-        if(position < screenHeight - 100){
+        let position=element.getBoundingClientRect().top;
+
+
+        if(position < window.innerHeight-100){
+
             element.classList.add("show");
+
         }
+
 
     });
 
+
 }
 
-window.addEventListener("scroll", showOnScroll);
 
-// Show visible elements immediately on page load
+
+window.addEventListener("scroll",showOnScroll);
+
+
 showOnScroll();
