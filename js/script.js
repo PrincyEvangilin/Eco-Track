@@ -1,17 +1,30 @@
-let ecoScore = 0;
+let ecoScore = Number(localStorage.getItem("ecoScore")) || 0;
+document.getElementById("score").textContent = ecoScore;
+if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark");
+}
+
+// Prevent duplicate tracker points
+let waterDone = localStorage.getItem("waterDone") === "true";
+let electricityDone = localStorage.getItem("electricityDone") === "true";
+let carbonDone = localStorage.getItem("carbonDone") === "true";
+
+// ---------------- Eco Score ----------------
 
 function updateScore(points) {
-
     ecoScore += points;
 
     document.getElementById("score").textContent = ecoScore;
+    localStorage.setItem("ecoScore", ecoScore);
 
     if (ecoScore >= 100) {
         document.getElementById("badge").innerHTML =
-        "🏆 Congratulations! You are an Eco Hero!";
+            "🏆 Congratulations! You are an Eco Hero!";
     }
-
 }
+
+// ---------------- Get Started ----------------
+
 const button = document.getElementById("startBtn");
 
 button.addEventListener("click", function () {
@@ -19,28 +32,56 @@ button.addEventListener("click", function () {
         behavior: "smooth"
     });
 });
+
+// ---------------- Water Tracker ----------------
+
 const waterBtn = document.getElementById("waterBtn");
 
 waterBtn.addEventListener("click", function () {
 
     const water = Number(document.getElementById("waterInput").value);
-
     const result = document.getElementById("waterResult");
 
+    if (isNaN(water) || water <= 0) {
+        result.innerHTML = "❌ Please enter valid litres.";
+        return;
+    }
+
     if (water <= 100) {
-    result.innerHTML = "🌿 Excellent! You're saving water.";
-    updateScore(25);
-}
-else if (water <= 200) {
-    result.innerHTML = "💧 Good! Try to save a little more.";
-    updateScore(15);
-}
-else {
-    result.innerHTML = "⚠️ High water usage. Save more water!";
-    updateScore(5);
-}
+        result.innerHTML = "🌿 Excellent! You're saving water.";
+
+        if (!waterDone) {
+            updateScore(25);
+            waterDone = true;
+localStorage.setItem("waterDone", "true");
+        }
+
+    } else if (water <= 200) {
+
+        result.innerHTML = "💧 Good! Try to save a little more.";
+
+        if (!waterDone) {
+            updateScore(15);
+            waterDone = true;
+localStorage.setItem("waterDone", "true");
+        }
+
+    } else {
+
+        result.innerHTML = "⚠️ High water usage. Save more water!";
+
+        if (!waterDone) {
+            updateScore(5);
+            waterDone = true;
+localStorage.setItem("waterDone", "true");
+        }
+
+    }
 
 });
+
+// ---------------- Electricity Tracker ----------------
+
 const electricityBtn = document.getElementById("electricityBtn");
 
 electricityBtn.addEventListener("click", function () {
@@ -48,43 +89,94 @@ electricityBtn.addEventListener("click", function () {
     const units = Number(document.getElementById("electricityInput").value);
     const result = document.getElementById("electricityResult");
 
+    if (isNaN(units) || units <= 0) {
+        result.innerHTML = "❌ Please enter valid units.";
+        return;
+    }
+
     if (units <= 200) {
-    result.innerHTML = "🌿 Excellent! Eco-friendly usage.";
-    updateScore(25);
-}
-else if (units <= 500) {
-    result.innerHTML = "⚡ Moderate usage.";
-    updateScore(15);
-}
-else {
-    result.innerHTML = "🚨 High electricity usage.";
-    updateScore(5);
-}
+
+        result.innerHTML = "🌿 Excellent! Eco-friendly usage.";
+
+        if (!electricityDone) {
+            updateScore(25);
+            electricityDone = true;
+localStorage.setItem("electricityDone", "true");
+        }
+
+    } else if (units <= 500) {
+
+        result.innerHTML = "⚡ Moderate usage.";
+
+        if (!electricityDone) {
+            updateScore(15);
+            electricityDone = true;
+localStorage.setItem("electricityDone", "true");
+        }
+
+    } else {
+
+        result.innerHTML = "🚨 High electricity usage.";
+
+        if (!electricityDone) {
+            updateScore(5);
+            electricityDone = true;
+localStorage.setItem("electricityDone", "true");
+        }
+
+    }
+
 });
+// ---------------- Carbon Tracker ----------------
+
 const carbonBtn = document.getElementById("carbonBtn");
 
 carbonBtn.addEventListener("click", function () {
 
     const km = Number(document.getElementById("carbonInput").value);
-
     const result = document.getElementById("carbonResult");
-if (isNaN(km) || km <= 0) {
+
+    if (isNaN(km) || km <= 0) {
         result.innerHTML = "❌ Please enter a valid distance.";
+        return;
     }
-    else if (km <= 10) {
-    result.innerHTML = "🌿 Low carbon footprint.";
-    updateScore(25);
-}
-else if (km <= 30) {
-    result.innerHTML = "🚶 Moderate carbon footprint.";
-    updateScore(15);
-}
-else {
-    result.innerHTML = "🚗 High carbon footprint.";
-    updateScore(5);
-}
+
+    if (km <= 10) {
+
+        result.innerHTML = "🌿 Low carbon footprint.";
+
+        if (!carbonDone) {
+            updateScore(25);
+            carbonDone = true;
+localStorage.setItem("carbonDone", "true");
+        }
+
+    } else if (km <= 30) {
+
+        result.innerHTML = "🚶 Moderate carbon footprint.";
+
+        if (!carbonDone) {
+            updateScore(15);
+            carbonDone = true;
+localStorage.setItem("carbonDone", "true");
+        }
+
+    } else {
+
+        result.innerHTML = "🚗 High carbon footprint.";
+
+        if (!carbonDone) {
+            updateScore(5);
+          carbonDone = true;
+localStorage.setItem("carbonDone", "true");
+        }
+
+    }
 
 });
+
+// ---------------- Waste Tracker ----------------
+
 const wasteBtn = document.getElementById("wasteBtn");
 
 wasteBtn.addEventListener("click", function () {
@@ -109,73 +201,99 @@ wasteBtn.addEventListener("click", function () {
     }
 
 });
+
+// ---------------- Dark Mode ----------------
+
 const themeBtn = document.getElementById("themeBtn");
 
 themeBtn.addEventListener("click", function () {
 
     document.body.classList.toggle("dark");
 
-    if(document.body.classList.contains("dark")){
-        themeBtn.innerHTML="☀️";
-    }
-    else{
-        themeBtn.innerHTML="🌙";
+    if (document.body.classList.contains("dark")) {
+        themeBtn.innerHTML = "☀️";
+        localStorage.setItem("darkMode", "true");
+    } 
+    else {
+        themeBtn.innerHTML = "🌙";
+        localStorage.setItem("darkMode", "false");
     }
 
 });
+
+// ---------------- Eco Goals ----------------
+
 let goals = document.querySelectorAll(".goal");
 let points = document.getElementById("points");
 let level = document.getElementById("level");
 let progress = document.getElementById("progress");
 let completed = document.getElementById("completed");
 
-let ecoPoints = localStorage.getItem("ecoPoints") || 0;
-ecoPoints = Number(ecoPoints);
 let savedGoals = JSON.parse(localStorage.getItem("savedGoals")) || [];
-goals.forEach(function(goal, index) {
 
-    if (savedGoals.includes(index)) {
+let ecoPoints = savedGoals.length * 10;
+
+// Restore checked goals
+goals.forEach(function(goal, index){
+
+    if(savedGoals.includes(index)){
         goal.checked = true;
     }
 
 });
-goals.forEach(function(goal, index) {
 
-    goal.addEventListener("change", function() {
+// Goal events
+goals.forEach(function(goal, index){
 
-        if (goal.checked) {
-    ecoPoints += 10;
-    savedGoals.push(index);
-} 
-else {
-    ecoPoints -= 10;
-    savedGoals = savedGoals.filter(function(item){
-        return item !== index;
-    });
-}
+    goal.addEventListener("change", function(){
+
+        if(goal.checked){
+
+            if(!savedGoals.includes(index)){
+                savedGoals.push(index);
+                ecoPoints += 10;
+            }
+
+        }else{
+
+            savedGoals = savedGoals.filter(function(item){
+                return item !== index;
+            });
+
+            ecoPoints -= 10;
+
+        }
+
         points.textContent = ecoPoints;
 
         updateProgress();
         updateLevel();
-        localStorage.setItem("ecoPoints", ecoPoints);
+
         localStorage.setItem("savedGoals", JSON.stringify(savedGoals));
 
     });
 
 });
-
-
+// ---------------- Progress Bar ----------------
 function updateProgress() {
 
     let completedGoals = document.querySelectorAll(".goal:checked").length;
+
+    completed.textContent = completedGoals;
 
     let percentage = (completedGoals / goals.length) * 100;
 
     progress.style.width = percentage + "%";
 
-    completed.textContent = completedGoals;
-
 }
+document.getElementById("score").textContent = ecoScore;
+if (ecoScore >= 100) {
+    document.getElementById("badge").innerHTML =
+        "🏆 Congratulations! You are an Eco Hero!";
+}
+
+// ---------------- Eco Level ----------------
+
 function updateLevel() {
 
     if (ecoPoints === 0) {
@@ -187,19 +305,28 @@ function updateLevel() {
     else if (ecoPoints <= 20) {
         level.textContent = "Eco Friend 🌿";
     }
-    else {
+    else if (ecoPoints <= 40) {
         level.textContent = "Eco Hero 🌳";
+    }
+    else {
+        level.textContent = "Eco Champion 🏆";
     }
 
 }
+
+// ---------------- Initial Load ----------------
+
 points.textContent = ecoPoints;
 updateLevel();
 updateProgress();
+
+// ---------------- Active Navbar ----------------
+
 const navLinks = document.querySelectorAll(".nav-links a");
 
 navLinks.forEach(function(link){
 
-    link.addEventListener("click",function(){
+    link.addEventListener("click", function(){
 
         navLinks.forEach(function(item){
             item.classList.remove("active");
@@ -210,17 +337,18 @@ navLinks.forEach(function(link){
     });
 
 });
+
+// ---------------- Scroll Animation ----------------
+
 const animatedElements = document.querySelectorAll(
     ".card, .dashboard-card, .goals, .score"
 );
 
-
-window.addEventListener("scroll", function(){
+function showOnScroll(){
 
     animatedElements.forEach(function(element){
 
         let position = element.getBoundingClientRect().top;
-
         let screenHeight = window.innerHeight;
 
         if(position < screenHeight - 100){
@@ -229,4 +357,9 @@ window.addEventListener("scroll", function(){
 
     });
 
-});
+}
+
+window.addEventListener("scroll", showOnScroll);
+
+// Show visible elements immediately on page load
+showOnScroll();
