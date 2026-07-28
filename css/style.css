@@ -286,13 +286,15 @@ label:has(input:checked) {
 @media(max-width:768px){
 
     .navbar{
-        flex-direction:column;
-        gap:15px;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
     }
 
     .nav-links{
-        flex-direction:column;
-        gap:15px;
+        flex-direction:row;
+        gap:10px;
+        flex-wrap:wrap;
     }
 
     .hero{
@@ -312,15 +314,12 @@ label:has(input:checked) {
         font-size:100px;
     }
 
-    .features{
-        grid-template-columns:1fr;
-    }
-
+    .features,
     .dashboard{
         grid-template-columns:1fr;
     }
-
 }
+
 html{
     scroll-behavior:smooth;
 }
