@@ -1,2 +1,15 @@
-# Eco-Track
-EcoTrack is a smart eco-friendly dashboard that helps users track water usage, electricity consumption, carbon footprint, waste management, and daily green habits.
+# 🌿 EcoTrack
+
+EcoTrack is an eco-friendly web application that helps users track their daily environmental activities.
+
+## Features
+- 💧 Water Tracker
+- ⚡ Electricity Tracker
+- 🌍 Carbon Footprint Tracker
+- ♻ Waste Tracker
+- 🌱 Eco Goals & Progress
+
+## Technologies Used
+- HTML
+- CSS
+- JavaScript
